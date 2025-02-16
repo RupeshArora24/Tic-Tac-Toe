@@ -16,8 +16,13 @@ def playerInput(board):
     inp = int(input("Enter a number 1-9 : "))
     if inp >=1 and inp<=9 and board[inp-1]== "-": # here we are checking the entered input is valid or not, and is the place is empty to mae the entry
         board[inp-1]=currentPlayer # here we are updating the value of board list by adding the X or O into the space
+    elif inp <=1 or inp>=9 :
+        print("Please enter a valid position")
+        playerInput(board) 
+
     else :
         print("Oops player is alredy in the spot ! ")
+        playerInput(board) # this is for , as when wrong input is taken then it will enter in this condtion but we are calling this function here again as it should nt skip the current player chance , if you not add this then it will miss the current player chance and t moves to next player.
 
 
 
@@ -55,7 +60,14 @@ def checkSideways(board) :
       elif board[2] == board[4] == board[6] and board[2]!="-":
         winner = board[4]
         return True
-               
+
+def checkWin(board) :
+    global winner,gameRunning
+    if checkSideways(board) or checkVerticle(board) or chekHrizontal(board) :
+        print(f"And the Winner is {winner}.") 
+        gameRunning = False 
+
+
 # Step 4 - check for a  tie 
 def checkTie(board):
     if "-" not in board:
@@ -65,13 +77,17 @@ def checkTie(board):
 
 
 # Step 5 - switch the player
-def switchPlayer(board):
+def switchPlayer():
+    global currentPlayer
     if currentPlayer =="X":
-        currentPlayer=="Y"
+        currentPlayer="O"
     else :
         currentPlayer="X"    
 
 # step 5 - check for win or tie again
 while gameRunning:
     printBoard(board) 
-    playerInput(board)        
+    playerInput(board) 
+    checkWin(board)
+    checkTie(board)
+    switchPlayer()       
