@@ -22,7 +22,7 @@ def playerInput(board):
 
 
 
-# Step 3 - check for win or tie
+# Step 3 - check for win or losse
 def chekHrizontal(board):
     global winner # whenever we changes the value here then it occour in whole file as in python methods if make changes they are for that method, by adding global it will make the changes to variable all over the file.
     if board[0] == board[1] == board[2] and board[1]!="-":
@@ -56,8 +56,21 @@ def checkSideways(board) :
         winner = board[4]
         return True
                
-# Step 4 - switch the player
- 
+# Step 4 - check for a  tie 
+def checkTie(board):
+    if "-" not in board:
+        printBoard(board)
+        print("It is a tie")
+        gameRunning = False
+
+
+# Step 5 - switch the player
+def switchPlayer(board):
+    if currentPlayer =="X":
+        currentPlayer=="Y"
+    else :
+        currentPlayer="X"    
+
 # step 5 - check for win or tie again
 while gameRunning:
     printBoard(board) 
