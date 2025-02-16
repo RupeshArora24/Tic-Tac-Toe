@@ -96,7 +96,7 @@ def computer(board):
         if board[position] == "-":
             board[position] = currentPlayer
             switchPlayer() 
-    
+     
 while gameRunning:
     printBoard(board) 
     playerInput(board) 
